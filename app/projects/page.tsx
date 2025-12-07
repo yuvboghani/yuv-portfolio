@@ -99,7 +99,7 @@ export default function ProjectsPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
-          className="font-syncopate text-6xl md:text-8xl font-bold mb-16 uppercase tracking-tight"
+          className="font-syncopate text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-16 uppercase tracking-tight"
         >
           Projects
         </motion.h1>
