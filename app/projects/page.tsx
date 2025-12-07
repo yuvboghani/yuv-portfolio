@@ -185,21 +185,23 @@ function ProjectCard({ project, index }: { project: any; index: number }) {
             ))}
           </div>
         </div>
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-2 md:gap-3">
           {buttonsLocked ? (
             <>
               <ConstructionOverlay type="badge">
                 <button
-                  className="flex items-center gap-2 px-6 py-3 bg-neutral-800 rounded-full font-space-grotesk font-semibold text-neutral-500 uppercase tracking-wide text-sm cursor-not-allowed"
+                  className="flex items-center justify-center gap-1.5 md:gap-2 px-4 md:px-6 py-2 md:py-3 bg-neutral-800 rounded-full font-space-grotesk font-semibold text-neutral-500 uppercase tracking-wide text-xs md:text-sm cursor-not-allowed"
                 >
-                  Demo <ExternalLink className="w-4 h-4" />
+                  Demo <ExternalLink className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
                 </button>
               </ConstructionOverlay>
               <ConstructionOverlay type="badge">
                 <button
-                  className="flex items-center gap-2 px-6 py-3 bg-neutral-800 border-2 border-neutral-700 rounded-full font-space-grotesk font-semibold text-neutral-500 uppercase tracking-wide text-sm cursor-not-allowed"
+                  className="flex items-center justify-center gap-1.5 md:gap-2 px-4 md:px-6 py-2 md:py-3 bg-neutral-800 border-2 border-neutral-700 rounded-full font-space-grotesk font-semibold text-neutral-500 uppercase tracking-wide text-xs md:text-sm cursor-not-allowed"
                 >
-                  Behind the Scenes <Book className="w-4 h-4" />
+                  <span className="hidden sm:inline">Behind the Scenes</span>
+                  <span className="sm:hidden">Blog</span>
+                  <Book className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
                 </button>
               </ConstructionOverlay>
             </>
@@ -207,16 +209,18 @@ function ProjectCard({ project, index }: { project: any; index: number }) {
             <>
               <a
                 href={project.demoLink}
-                className="flex items-center gap-2 px-6 py-3 bg-[#42B0D5] rounded-full font-space-grotesk font-semibold hover:opacity-90 transition-opacity uppercase tracking-wide text-sm"
+                className="flex items-center justify-center gap-1.5 md:gap-2 px-4 md:px-6 py-2 md:py-3 bg-[#42B0D5] rounded-full font-space-grotesk font-semibold hover:opacity-90 transition-opacity uppercase tracking-wide text-xs md:text-sm"
               >
-                Demo <ExternalLink className="w-4 h-4" />
+                Demo <ExternalLink className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
               </a>
 
               <Link
                 href={`/blog/${project.blogSlug}`}
-                className="flex items-center gap-2 px-6 py-3 border-2 border-[#42B0D5] rounded-full font-space-grotesk font-semibold hover:bg-[#42B0D5]/10 transition-colors uppercase tracking-wide text-sm"
+                className="flex items-center justify-center gap-1.5 md:gap-2 px-4 md:px-6 py-2 md:py-3 border-2 border-[#42B0D5] rounded-full font-space-grotesk font-semibold hover:bg-[#42B0D5]/10 transition-colors uppercase tracking-wide text-xs md:text-sm"
               >
-                Behind the Scenes <Book className="w-4 h-4" />
+                <span className="hidden sm:inline">Behind the Scenes</span>
+                <span className="sm:hidden">Blog</span>
+                <Book className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
               </Link>
             </>
           )}
