@@ -52,26 +52,18 @@ export default function ContactPage() {
 
             {/* Addresses */}
             <div className="pt-4 space-y-4">
-              <div className="flex items-start gap-4 group">
-                <div className="p-3 bg-[#42B0D5]/10 rounded-full text-[#42B0D5] flex-shrink-0 group-hover:bg-[#42B0D5] group-hover:text-white transition-colors mt-1">
+              <div className="flex items-center gap-4 group">
+                <div className="p-3 bg-[#42B0D5]/10 rounded-full text-[#42B0D5] flex-shrink-0 group-hover:bg-[#42B0D5] group-hover:text-white transition-colors">
                   <MapPin className="w-5 h-5" />
                 </div>
-                <div className="font-space-grotesk text-sm md:text-base text-neutral-300">
-                  <p className="font-semibold text-white">State College</p>
-                  <p>601 Vairo Blvd</p>
-                  <p>State College, PA - 16803</p>
-                </div>
+                <span className="font-space-grotesk text-sm md:text-base">State College, PA</span>
               </div>
 
-              <div className="flex items-start gap-4 group">
-                <div className="p-3 bg-[#42B0D5]/10 rounded-full text-[#42B0D5] flex-shrink-0 group-hover:bg-[#42B0D5] group-hover:text-white transition-colors mt-1">
+              <div className="flex items-center gap-4 group">
+                <div className="p-3 bg-[#42B0D5]/10 rounded-full text-[#42B0D5] flex-shrink-0 group-hover:bg-[#42B0D5] group-hover:text-white transition-colors">
                   <MapPin className="w-5 h-5" />
                 </div>
-                <div className="font-space-grotesk text-sm md:text-base text-neutral-300">
-                  <p className="font-semibold text-white">San Diego</p>
-                  <p>3801 Marquette Place</p>
-                  <p>San Diego, CA - 92106</p>
-                </div>
+                <span className="font-space-grotesk text-sm md:text-base">San Diego, CA</span>
               </div>
             </div>
           </div>
