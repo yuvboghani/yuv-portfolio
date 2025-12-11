@@ -34,3 +34,4 @@ Thumbs.db
 
 # Large files - Photography (should be optimized before committing)
 public/photography/
+.env*.local
