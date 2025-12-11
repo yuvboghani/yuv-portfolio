@@ -1,20 +1,34 @@
 import { NextResponse } from "next/server"
+import { list } from "@vercel/blob"
 import fs from "fs"
 import path from "path"
 
 export async function GET() {
-    const photographyDir = path.join(process.cwd(), "public", "photography")
-
     try {
-        // Check if directory exists
+        // First, try to get images from Vercel Blob (production)
+        if (process.env.BLOB_READ_WRITE_TOKEN) {
+            const { blobs } = await list({ prefix: "photography/" })
+
+            if (blobs.length > 0) {
+                const images = blobs
+                    .filter((blob) => {
+                        const ext = path.extname(blob.pathname).toLowerCase()
+                        return [".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif"].includes(ext)
+                    })
+                    .map((blob) => blob.url)
+
+                return NextResponse.json({ images })
+            }
+        }
+
+        // Fallback to local filesystem (development)
+        const photographyDir = path.join(process.cwd(), "public", "photography")
+
         if (!fs.existsSync(photographyDir)) {
             return NextResponse.json({ images: [] })
         }
 
-        // Read all files from the photography directory
         const files = fs.readdirSync(photographyDir)
-
-        // Filter for image files only
         const imageExtensions = [".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif"]
         const images = files
             .filter((file) => {
@@ -24,7 +38,8 @@ export async function GET() {
             .map((file) => `/photography/${file}`)
 
         return NextResponse.json({ images })
-    } catch {
+    } catch (error) {
+        console.error("Photography API error:", error)
         return NextResponse.json({ images: [] })
     }
 }
