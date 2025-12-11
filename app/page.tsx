@@ -1,6 +1,7 @@
 "use client"
 import { motion } from "framer-motion"
 import Link from "next/link"
+import { SkillsCard, skillsData } from "@/components/skills-card"
 
 export default function HomePage() {
   return (
@@ -26,7 +27,7 @@ export default function HomePage() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="/experience"
-                className="px-8 py-4 bg-[#42B0D5] rounded-full font-space-grotesk font-semibold hover:opacity-90 transition-opacity uppercase tracking-wide text-center"
+                className="px-8 py-4 border-2 border-[#42B0D5] rounded-full font-space-grotesk font-semibold hover:bg-[#42B0D5]/10 transition-colors uppercase tracking-wide text-center"
               >
                 Explore Experience
               </Link>
@@ -139,6 +140,39 @@ export default function HomePage() {
               </p>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section id="skills" className="relative px-4 md:px-6 py-24 md:py-32">
+        <div className="max-w-6xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="font-syncopate text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tight text-center mb-16"
+          >
+            SKILLS
+          </motion.h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {skillsData.map((category, index) => (
+              <motion.div
+                key={category.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <SkillsCard
+                  title={category.title}
+                  icon={category.icon}
+                  skills={category.skills}
+                />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
     </main>

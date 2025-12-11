@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "motion/react"
+import { Download } from "lucide-react"
 
 export default function ExperiencePage() {
   const experiences = [
@@ -119,14 +120,31 @@ export default function ExperiencePage() {
   return (
     <main className="relative min-h-screen text-white px-4 md:px-8 lg:px-12 py-24 md:py-32">
       <div className="max-w-6xl mx-auto">
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="font-syncopate text-4xl md:text-6xl lg:text-7xl font-bold mb-16 md:mb-24 uppercase tracking-tight"
-        >
-          EXPERIENCE
-        </motion.h1>
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-16 md:mb-24">
+          <motion.h1
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="font-syncopate text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tight"
+          >
+            EXPERIENCE
+          </motion.h1>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            <a
+              href="/YAB Resume 2025N.pdf"
+              download
+              className="group flex items-center gap-2 px-5 py-2.5 border border-[#42B0D5]/50 rounded-full text-[#42B0D5] hover:bg-[#42B0D5] hover:text-black transition-all duration-300 font-space-grotesk text-sm font-medium uppercase tracking-wider"
+            >
+              <span>Download Resume</span>
+              <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+            </a>
+          </motion.div>
+        </div>
 
         <div className="relative">
           {/* Vertical spine line */}

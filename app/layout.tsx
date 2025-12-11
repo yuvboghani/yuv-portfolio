@@ -49,7 +49,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${syncopate.variable} ${spaceGrotesk.variable} font-space-grotesk antialiased bg-[#0a0a0c]`}>
+      <body className={`${syncopate.variable} ${spaceGrotesk.variable} font-space-grotesk antialiased bg-[#0a0a0c]`} suppressHydrationWarning>
         <Silk />
         <Navbar />
         <div className="pt-20">{children}</div>

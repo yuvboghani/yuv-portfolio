@@ -1,14 +1,27 @@
 "use client"
 
 import { motion } from "motion/react"
-import { ExternalLink, Book } from "lucide-react"
+import { ExternalLink, Book, Download } from "lucide-react"
 import Link from "next/link"
 import { ConstructionOverlay } from "@/components/ui/construction-overlay"
 
 export default function ProjectsPage() {
   const deployedProjects = [
     {
+      title: "Lidar Fusion Project",
+      company: "Penn State Advanced Vehicular Team",
+      description: "Real-time 3D spatial localization using Sensor Fusion",
+      fullDescription:
+        "Engineered a real-time sensor fusion pipeline in ROS 2 Humble using Python and OpenCV, implementing robust synchronization of high-frequency LiDAR and camera data via Best Effort QoS policies. Integrated this fused output with YOLO object detection to assign precise distance metrics to 2D bounding boxes, enabling accurate 3D spatial localization for dynamic obstacles.",
+      tags: ["ROS 2", "LiDAR", "Sensor Fusion", "OpenCV", "Python", "YOLO"],
+      demoLink: "#",
+      blogSlug: "lidar-fusion",
+      image: "/lidar-fusion-placeholder.jpg",
+      lockButtons: true,
+    },
+    {
       title: "Personal Portfolio V1",
+
       description: "Immersive 3D/WebGL Identity Platform",
       fullDescription:
         "A high-performance personal website built on Next.js 15. Features a custom 'Silk' WebGL fluid simulation background using React-Three-Fiber, a 'Magic Bento' inspired UI with glassmorphism effects, and a fully typed, scalable architecture deployed on Vercel.",
@@ -20,6 +33,7 @@ export default function ProjectsPage() {
     },
     {
       title: "ChatDnD",
+
       description: "Multi-Agent AI Dungeon Master with LangGraph",
       fullDescription:
         "Built a conversational AI system using LangGraph and MongoDB for managing complex multi-agent interactions in D&D gameplay. Integrated WebSockets for real-time communication.",
@@ -31,6 +45,7 @@ export default function ProjectsPage() {
     },
     {
       title: "Bayesian Portfolio Optimization",
+
       description: "LSTM stock forecasting with Bayesian Networks",
       fullDescription:
         "Developed a sophisticated portfolio management system combining LSTM neural networks with Bayesian inference for stock price prediction using Alpha Vantage data.",
@@ -42,6 +57,7 @@ export default function ProjectsPage() {
     },
     {
       title: "Distributed Storage System",
+
       description: "Linearized file system in C/C++ with multithreading",
       fullDescription:
         "Engineered a high-performance distributed file system with advanced concurrency control and linearizability guarantees.",
@@ -56,6 +72,7 @@ export default function ProjectsPage() {
   const pipelineProjects = [
     {
       title: "BuxBalance",
+
       description: "High-Fidelity Financial Command Center",
       fullDescription:
         "A hybrid personal finance platform combining the aesthetic visibility of Monarch Money with the subscription rigor of Rocket Money. Features a 'Magic Bento' UI, AI-powered transaction categorization using Gemini 2.5 Flash, and a massive interactive Sankey diagram for cash flow visualization.",
@@ -68,6 +85,7 @@ export default function ProjectsPage() {
     },
     {
       title: "BrickByBrick (B3)",
+
       description: "Supply Chain Optimization Engine for AFOLs",
       fullDescription:
         "An advanced sourcing engine decoupling the 'Part' from the 'Box.' It utilizes a specialized algorithm to source parts for retired Lego sets at a fraction of the cost. Features include a 3D R3F visualization of sets, occlusion analysis for internal parts, and a multi-mode sourcing engine (Purist vs. Builder modes).",
@@ -80,6 +98,7 @@ export default function ProjectsPage() {
     },
     {
       title: "FireWatch",
+
       description: "WRF-SFire Wildfire Simulation (HPC)",
       fullDescription:
         "A supercomputing initiative running on the Penn State ICDS Roar Cluster. This project compiles and executes the WRF-SFire model to simulate the 2018 Camp Fire in Butte County, CA. It involves complex compilation of Fortran/C static libraries to resolve architecture-specific (SIGILL) errors and integrates high-resolution LANDFIRE fuel data.",
@@ -95,14 +114,31 @@ export default function ProjectsPage() {
   return (
     <main className="relative min-h-screen text-white px-6 py-24">
       <div className="max-w-6xl mx-auto">
-        <motion.h1
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          className="font-syncopate text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-16 uppercase tracking-tight"
-        >
-          Projects
-        </motion.h1>
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-16">
+          <motion.h1
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            className="font-syncopate text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-bold uppercase tracking-tight"
+          >
+            Projects
+          </motion.h1>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            <a
+              href="/YAB Resume 2025N.pdf"
+              download
+              className="group flex items-center gap-2 px-5 py-2.5 border border-[#42B0D5]/50 rounded-full text-[#42B0D5] hover:bg-[#42B0D5] hover:text-black transition-all duration-300 font-space-grotesk text-sm font-medium uppercase tracking-wider"
+            >
+              <span>Download Resume</span>
+              <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+            </a>
+          </motion.div>
+        </div>
 
         {/* Deployed Systems Section */}
         <section className="mb-24">
@@ -166,13 +202,18 @@ function ProjectCard({ project, index }: { project: any; index: number }) {
 
       <div className="flex-1 p-6 flex flex-col justify-between">
         <div>
-          <h3 className="font-syncopate text-2xl font-bold mb-3 uppercase tracking-tight flex items-center gap-3">
+          <h3 className="font-syncopate text-2xl font-bold mb-1 uppercase tracking-tight flex items-center gap-3">
             {project.title}
             {project.isUnderConstruction && (
               <ConstructionOverlay type="badge">🚧</ConstructionOverlay>
             )}
           </h3>
-          <p className="text-[#42B0D5] text-sm font-space-grotesk mb-2 uppercase tracking-wide font-bold">{project.description}</p>
+          {project.company && (
+            <p className="text-[#42B0D5] font-space-grotesk text-lg font-semibold mt-1">
+              {project.company}
+            </p>
+          )}
+          <p className="text-[#42B0D5] text-sm font-space-grotesk mb-2 uppercase tracking-wide font-bold mt-2">{project.description}</p>
           <p className="text-neutral-300 mb-4 leading-relaxed font-space-grotesk">{project.fullDescription}</p>
           <div className="flex flex-wrap gap-2 mb-4">
             {project.tags.map((tag: string) => (

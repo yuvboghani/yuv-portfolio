@@ -1,5 +1,5 @@
 "use client"
-import React, { useMemo, useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { motion } from "motion/react"
 
 interface MasonryItem {
@@ -13,15 +13,8 @@ interface MasonryProps {
   columns?: number
   gap?: number
   className?: string
-  // Animation props
-  ease?: string
-  duration?: number
-  stagger?: number
-  animateFrom?: "bottom" | "top" | "left" | "right"
   scaleOnHover?: boolean
   hoverScale?: number
-  blurToFocus?: boolean // Note: strict blur-to-focus requires more complex state, implementing simple hover
-  colorShiftOnHover?: boolean
 }
 
 export function Masonry({
@@ -29,23 +22,13 @@ export function Masonry({
   columns = 3,
   gap = 4,
   className = "",
-  ease = "power3.out", // mapping to 'easeOut' in standard framer, or custom cubic-bezier
-  duration = 0.6,
-  stagger = 0.05,
-  animateFrom = "bottom",
   scaleOnHover = true,
   hoverScale = 0.95,
 }: MasonryProps) {
-  const [mounted, setMounted] = useState(false)
   const [columnCount, setColumnCount] = useState(columns)
 
+  // Responsive column adjustment
   useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  // Responsive column adjustment (simple)
-  useEffect(() => {
-    if (!mounted) return
     const handleResize = () => {
       if (window.innerWidth < 640) setColumnCount(1)
       else if (window.innerWidth < 1024) setColumnCount(2)
@@ -54,68 +37,45 @@ export function Masonry({
     handleResize()
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
-  }, [columns, mounted])
+  }, [columns])
 
-  const columnsData = useMemo(() => {
-    const cols: MasonryItem[][] = Array.from({ length: columnCount }, () => [])
-    items.forEach((item, index) => {
-      cols[index % columnCount].push(item)
-    })
-    return cols
-  }, [items, columnCount])
-
-  if (!mounted) return null // Prevent hydration mismatch by rendering nothing initially on client until mounted
-
-  // Motion variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: stagger,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: {
-      opacity: 0,
-      y: animateFrom === "bottom" ? 50 : 0,
-      x: animateFrom === "left" ? -50 : animateFrom === "right" ? 50 : 0
-    },
-    show: {
-      opacity: 1,
-      y: 0,
-      x: 0,
-      transition: { duration, ease: "easeOut" }
-    },
-  }
+  // Distribute items across columns
+  const columnsData: MasonryItem[][] = Array.from({ length: columnCount }, () => [])
+  items.forEach((item, index) => {
+    columnsData[index % columnCount].push(item)
+  })
 
   return (
     <div
-      className={`grid grid-cols-${columnCount} gap-${gap} ${className}`}
-      style={{ gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))` }}
+      className={`grid ${className}`}
+      style={{
+        gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))`,
+        gap: `${gap * 4}px`
+      }}
     >
       {columnsData.map((col, colIndex) => (
-        <motion.div
+        <div
           key={colIndex}
-          className={`flex flex-col gap-${gap}`}
-          variants={containerVariants}
-          initial="hidden"
-          animate="show" // Changed from whileInView to animate for better reliability
-          viewport={{ once: true, margin: "-50px" }}
+          className="flex flex-col"
+          style={{ gap: `${gap * 4}px` }}
         >
-          {col.map((item) => (
+          {col.map((item, itemIndex) => (
             <motion.div
               key={item.id}
-              variants={itemVariants}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.4,
+                delay: (colIndex * col.length + itemIndex) * 0.03,
+                ease: "easeOut"
+              }}
               whileHover={scaleOnHover ? { scale: hoverScale } : undefined}
               className="w-full relative group"
             >
               {item.element}
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       ))}
     </div>
   )

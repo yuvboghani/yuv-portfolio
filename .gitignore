@@ -31,3 +31,6 @@ Thumbs.db
 
 # Vercel
 .vercel
+
+# Large files - Photography (should be optimized before committing)
+public/photography/
