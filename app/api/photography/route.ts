@@ -1,45 +1,54 @@
 import { NextResponse } from "next/server"
 import { list } from "@vercel/blob"
-import fs from "fs"
-import path from "path"
+
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
 
 export async function GET() {
     try {
-        // First, try to get images from Vercel Blob (production)
-        if (process.env.BLOB_READ_WRITE_TOKEN) {
-            const { blobs } = await list({ prefix: "photography/" })
+        // Get images from Vercel Blob
+        const token = process.env.BLOB_READ_WRITE_TOKEN
 
-            if (blobs.length > 0) {
-                const images = blobs
-                    .filter((blob) => {
-                        const ext = path.extname(blob.pathname).toLowerCase()
-                        return [".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif"].includes(ext)
-                    })
-                    .map((blob) => blob.url)
-
-                return NextResponse.json({ images })
-            }
-        }
-
-        // Fallback to local filesystem (development)
-        const photographyDir = path.join(process.cwd(), "public", "photography")
-
-        if (!fs.existsSync(photographyDir)) {
-            return NextResponse.json({ images: [] })
-        }
-
-        const files = fs.readdirSync(photographyDir)
-        const imageExtensions = [".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif"]
-        const images = files
-            .filter((file) => {
-                const ext = path.extname(file).toLowerCase()
-                return imageExtensions.includes(ext)
+        if (!token) {
+            console.log("Photography API: No BLOB_READ_WRITE_TOKEN found")
+            return NextResponse.json({
+                images: [],
+                debug: "No BLOB_READ_WRITE_TOKEN environment variable found"
             })
-            .map((file) => `/photography/${file}`)
+        }
+
+        console.log("Photography API: Fetching from Vercel Blob...")
+
+        const { blobs } = await list({
+            prefix: "photography/",
+            token: token
+        })
+
+        console.log(`Photography API: Found ${blobs.length} blobs`)
+
+        if (blobs.length === 0) {
+            return NextResponse.json({
+                images: [],
+                debug: "No blobs found with prefix 'photography/'"
+            })
+        }
+
+        const imageExtensions = [".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif"]
+        const images = blobs
+            .filter((blob) => {
+                const pathname = blob.pathname.toLowerCase()
+                return imageExtensions.some(ext => pathname.endsWith(ext))
+            })
+            .map((blob) => blob.url)
+
+        console.log(`Photography API: Returning ${images.length} images`)
 
         return NextResponse.json({ images })
     } catch (error) {
         console.error("Photography API error:", error)
-        return NextResponse.json({ images: [] })
+        return NextResponse.json({
+            images: [],
+            error: error instanceof Error ? error.message : "Unknown error"
+        })
     }
 }
