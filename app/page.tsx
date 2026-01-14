@@ -21,8 +21,7 @@ export default function HomePage() {
             </h1>
 
             <div className="font-space-grotesk text-lg md:text-xl text-[#42B0D5] mb-8 leading-relaxed space-y-1">
-              <p>Computational Data Sciences Senior</p>
-              <p>Penn State</p>
+              <p>Computational Data Sciences Senior | Penn State</p>
               <p>Based in San Diego</p>
             </div>
 

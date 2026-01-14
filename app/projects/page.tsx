@@ -20,11 +20,11 @@ export default function ProjectsPage() {
       lockButtons: true,
     },
     {
-      title: "Personal Portfolio V1",
+      title: "Personal Portfolio V2.2",
 
       description: "Immersive 3D/WebGL Identity Platform",
       fullDescription:
-        "A high-performance personal website built on Next.js 15. Features a custom 'Silk' WebGL fluid simulation background using React-Three-Fiber, a 'Magic Bento' inspired UI with glassmorphism effects, and a fully typed, scalable architecture deployed on Vercel.",
+        "A high-performance site built on Next.js 15. Features a custom 'Silk' WebGL fluid sim via R3F with GPU shaders, glassmorphism UI with Framer Motion animations, and a fully typed, edge-deployed architecture on Vercel.",
       tags: ["Next.js 15", "WebGL/R3F", "Tailwind CSS", "Framer Motion", "TypeScript"],
       demoLink: "/",
       blogSlug: "portfolio-v1",
