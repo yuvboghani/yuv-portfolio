@@ -20,9 +20,11 @@ export default function HomePage() {
               YUV BOGHANI
             </h1>
 
-            <p className="font-space-grotesk text-xl md:text-2xl text-[#42B0D5] mb-8 leading-relaxed">
-              Computational Data Sciences Senior @ Penn State
-            </p>
+            <div className="font-space-grotesk text-lg md:text-xl text-[#42B0D5] mb-8 leading-relaxed space-y-1">
+              <p>Computational Data Sciences Senior</p>
+              <p>Penn State</p>
+              <p>Based in San Diego</p>
+            </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
@@ -78,7 +80,7 @@ export default function HomePage() {
               </p>
               <p className="font-space-grotesk text-base md:text-lg text-neutral-300 leading-relaxed mt-4">
                 If you've landed here, you might have already glanced at my LinkedIn or seen the polished summaries on
-                my resume. But those platforms only show the destination—they rarely show the journey.
+                my resume. But those platforms only show the destination - they rarely show the journey.
               </p>
             </div>
 
@@ -94,7 +96,7 @@ export default function HomePage() {
               </p>
               <p className="font-space-grotesk text-base md:text-lg text-neutral-300 leading-relaxed mb-4">
                 <span className="text-[#42B0D5] font-semibold">The System Design:</span> I treat this site as a living
-                design document. I want to explain why I chose a specific architecture—why I implemented a RAG pipeline
+                design document. I want to explain why I chose a specific architecture - why I implemented a RAG pipeline
                 instead of fine-tuning for my D&D agent, or why I chose C for a distributed storage system. It's about
                 the constraints, the trade-offs, and the engineering logic that isn't visible in a README file.
               </p>
@@ -144,8 +146,8 @@ export default function HomePage() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="relative px-4 md:px-6 py-24 md:py-32">
-        <div className="max-w-6xl mx-auto">
+      <section id="skills" className="relative px-6 md:px-8 py-24 md:py-32">
+        <div className="max-w-6xl mx-auto w-full">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -156,7 +158,7 @@ export default function HomePage() {
             SKILLS
           </motion.h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {skillsData.map((category, index) => (
               <motion.div
                 key={category.title}

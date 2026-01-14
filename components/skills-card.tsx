@@ -43,7 +43,7 @@ export const skillsData = [
 
 export function SkillsCard({ title, icon: Icon, skills }: SkillsCardProps) {
     return (
-        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 h-full min-w-[280px] hover:border-[#42B0D5]/50 transition-colors group">
+        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 md:p-6 h-auto min-h-fit hover:border-[#42B0D5]/50 transition-colors group">
             {/* Header */}
             <div className="flex items-center gap-3 mb-4">
                 <Icon className="w-5 h-5 text-[#42B0D5]/50 group-hover:text-[#42B0D5] transition-colors" />

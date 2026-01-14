@@ -112,8 +112,8 @@ export default function ProjectsPage() {
   ]
 
   return (
-    <main className="relative min-h-screen text-white px-6 py-24">
-      <div className="max-w-6xl mx-auto">
+    <main className="relative min-h-screen text-white px-4 md:px-6 py-24">
+      <div className="max-w-6xl mx-auto w-full">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-16">
           <motion.h1
             initial={{ opacity: 0 }}
@@ -175,12 +175,12 @@ function ProjectCard({ project, index }: { project: any; index: number }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      animate={index === 0 ? { opacity: 1, x: 0 } : undefined}
-      whileInView={index === 0 ? undefined : { opacity: 1, x: 0 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={index === 0 ? { opacity: 1, y: 0 } : undefined}
+      whileInView={index === 0 ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group flex flex-col md:flex-row gap-6 bg-neutral-900/40 backdrop-blur-sm border-2 border-neutral-800 rounded-2xl overflow-hidden hover:bg-neutral-900/60 hover:border-[#42B0D5]/50 transition-all"
+      className="group flex flex-col md:flex-row gap-4 md:gap-6 bg-neutral-900/40 backdrop-blur-sm border-2 border-neutral-800 rounded-2xl overflow-hidden hover:bg-neutral-900/60 hover:border-[#42B0D5]/50 transition-all"
     >
       <div className="md:w-2/5 aspect-video overflow-hidden flex-shrink-0 relative">
         {project.isUnderConstruction ? (

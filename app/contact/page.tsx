@@ -13,8 +13,8 @@ import {
 
 export default function ContactPage() {
   return (
-    <main className="relative min-h-screen text-white px-4 md:px-6 py-24">
-      <div className="max-w-4xl mx-auto">
+    <main className="relative min-h-screen text-white px-6 md:px-8 py-24">
+      <div className="max-w-4xl mx-auto w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -132,17 +132,17 @@ export default function ContactPage() {
             SKILLS
           </h2>
 
-          <div className="px-12">
+          <div className="px-8 md:px-12">
             <Carousel
               opts={{
                 align: "start",
                 loop: true,
               }}
-              className="w-full"
+              className="w-full max-w-full overflow-hidden"
             >
-              <CarouselContent className="-ml-4">
+              <CarouselContent className="-ml-2 md:-ml-4">
                 {skillsData.map((category) => (
-                  <CarouselItem key={category.title} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
+                  <CarouselItem key={category.title} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
                     <SkillsCard
                       title={category.title}
                       icon={category.icon}

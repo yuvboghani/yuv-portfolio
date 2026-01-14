@@ -15,9 +15,9 @@ export function Navbar() {
   const pathname = usePathname()
 
   return (
-    <div className="fixed top-0 left-0 w-full z-[100] pointer-events-none p-3 md:p-6 flex justify-center md:justify-end items-start">
-      <nav className="pointer-events-auto max-w-[calc(100vw-1.5rem)] overflow-x-auto scrollbar-none">
-        <ul className="flex items-center gap-0.5 md:gap-1 bg-neutral-900/70 backdrop-blur-md border border-white/10 rounded-full p-1.5 md:p-2 px-2 md:px-4 shadow-2xl">
+    <div className="fixed top-0 left-0 w-full z-[100] pointer-events-none px-4 py-3 md:p-6 flex justify-center md:justify-end items-start">
+      <nav className="pointer-events-auto max-w-[calc(100vw-2rem)] overflow-x-auto scrollbar-none">
+        <ul className="flex items-center gap-0.5 md:gap-1 bg-neutral-900/70 backdrop-blur-md border border-white/10 rounded-full p-1.5 md:p-2 px-3 md:px-4 shadow-2xl">
           {navItems.map((item) => {
             const isActive = pathname === item.path
             return (

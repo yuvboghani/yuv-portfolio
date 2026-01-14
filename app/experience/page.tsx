@@ -154,70 +154,66 @@ export default function ExperiencePage() {
             {experiences.map((exp, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: -20 }}
-                animate={index === 0 ? { opacity: 1, x: 0 } : undefined}
-                whileInView={index === 0 ? undefined : { opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={index === 0 ? { opacity: 1, y: 0 } : undefined}
+                whileInView={index === 0 ? undefined : { opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
-                className="relative"
+                className="relative w-full bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-8 hover:bg-white/10 hover:border-[#42B0D5]/30 transition-all duration-300 group"
               >
                 {/* Glowing dot connector */}
                 <div className="absolute -left-[2.35rem] md:-left-[4.4rem] top-6 w-4 h-4 bg-[#0a0a0c] border-2 border-[#42B0D5] rounded-full shadow-[0_0_10px_rgba(66,176,213,0.5)] z-10">
                   <div className="absolute inset-1 bg-[#42B0D5] rounded-full animate-pulse"></div>
                 </div>
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-4">
+                  <div>
+                    <h3 className="font-syncopate text-xl md:text-2xl font-bold uppercase tracking-tight text-white group-hover:text-[#42B0D5] transition-colors">
+                      {exp.role}
+                    </h3>
+                    <p className="text-[#42B0D5] font-space-grotesk text-lg font-semibold mt-1">
+                      {/* @ts-ignore */}
+                      {exp.companyUrl ? (
+                        <a
+                          href={exp.companyUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-white transition-colors border-b border-[#42B0D5]/30 hover:border-[#42B0D5]"
+                        >
+                          {exp.company}
+                        </a>
+                      ) : (
+                        exp.company
+                      )}
+                    </p>
+                  </div>
+                  <span className="inline-block px-3 py-1 bg-white/5 rounded-full text-xs md:text-sm text-neutral-400 font-space-grotesk font-medium whitespace-nowrap border border-white/5">
+                    {exp.period}
+                  </span>
+                </div>
 
-                {/* Card */}
-                <div className="w-full bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-8 hover:bg-white/10 hover:border-[#42B0D5]/30 transition-all duration-300 group">
-                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-4">
-                    <div>
-                      <h3 className="font-syncopate text-xl md:text-2xl font-bold uppercase tracking-tight text-white group-hover:text-[#42B0D5] transition-colors">
-                        {exp.role}
-                      </h3>
-                      <p className="text-[#42B0D5] font-space-grotesk text-lg font-semibold mt-1">
-                        {/* @ts-ignore */}
-                        {exp.companyUrl ? (
-                          <a
-                            href={exp.companyUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:text-white transition-colors border-b border-[#42B0D5]/30 hover:border-[#42B0D5]"
-                          >
-                            {exp.company}
-                          </a>
-                        ) : (
-                          exp.company
-                        )}
-                      </p>
-                    </div>
-                    <span className="inline-block px-3 py-1 bg-white/5 rounded-full text-xs md:text-sm text-neutral-400 font-space-grotesk font-medium whitespace-nowrap border border-white/5">
-                      {exp.period}
+                {/* Bullet points */}
+                <ul className="space-y-3 mb-6">
+                  {exp.bullets.map((bullet, idx) => (
+                    <li
+                      key={idx}
+                      className="text-neutral-300 leading-relaxed font-space-grotesk text-sm md:text-base flex items-start"
+                    >
+                      <span className="text-[#42B0D5] mr-3 mt-1.5 w-1.5 h-1.5 bg-[#42B0D5] rounded-full flex-shrink-0"></span>
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2">
+                  {exp.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 bg-[#42B0D5]/5 border border-[#42B0D5]/20 rounded-full text-xs text-[#42B0D5]/80 font-space-grotesk"
+                    >
+                      {tag}
                     </span>
-                  </div>
-
-                  {/* Bullet points */}
-                  <ul className="space-y-3 mb-6">
-                    {exp.bullets.map((bullet, idx) => (
-                      <li
-                        key={idx}
-                        className="text-neutral-300 leading-relaxed font-space-grotesk text-sm md:text-base flex items-start"
-                      >
-                        <span className="text-[#42B0D5] mr-3 mt-1.5 w-1.5 h-1.5 bg-[#42B0D5] rounded-full flex-shrink-0"></span>
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
-                    {exp.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 bg-[#42B0D5]/5 border border-[#42B0D5]/20 rounded-full text-xs text-[#42B0D5]/80 font-space-grotesk"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                  ))}
                 </div>
               </motion.div>
             ))}
