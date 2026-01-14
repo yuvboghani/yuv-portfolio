@@ -3,13 +3,6 @@
 import { motion } from "motion/react"
 import { Github, Linkedin, Mail, MapPin, Phone, Download } from "lucide-react"
 import { SkillsCard, skillsData } from "@/components/skills-card"
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-} from "@/components/ui/carousel"
 
 export default function ContactPage() {
   return (
@@ -121,7 +114,7 @@ export default function ContactPage() {
           </a>
         </motion.div>
 
-        {/* Skills Carousel Section */}
+        {/* Skills Grid */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -132,28 +125,21 @@ export default function ContactPage() {
             SKILLS
           </h2>
 
-          <div className="px-8 md:px-12">
-            <Carousel
-              opts={{
-                align: "start",
-                loop: true,
-              }}
-              className="w-full max-w-full overflow-hidden"
-            >
-              <CarouselContent className="-ml-2 md:-ml-4">
-                {skillsData.map((category) => (
-                  <CarouselItem key={category.title} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
-                    <SkillsCard
-                      title={category.title}
-                      icon={category.icon}
-                      skills={category.skills}
-                    />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="bg-white/5 border-white/10 hover:bg-[#42B0D5] hover:border-[#42B0D5] text-white" />
-              <CarouselNext className="bg-white/5 border-white/10 hover:bg-[#42B0D5] hover:border-[#42B0D5] text-white" />
-            </Carousel>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {skillsData.map((category, index) => (
+              <motion.div
+                key={category.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
+              >
+                <SkillsCard
+                  title={category.title}
+                  icon={category.icon}
+                  skills={category.skills}
+                />
+              </motion.div>
+            ))}
           </div>
         </motion.div>
       </div>
