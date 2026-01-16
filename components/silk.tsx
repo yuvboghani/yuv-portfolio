@@ -2,8 +2,8 @@
 "use client"
 import type React from "react"
 import { forwardRef, useMemo, useRef, useLayoutEffect } from "react"
-import { Canvas, useFrame, useThree, type RootState } from "@react-three/fiber"
-import { Color, type Mesh, type ShaderMaterial } from "three"
+import { Canvas, useThree } from "@react-three/fiber"
+import { Color, type Mesh } from "three"
 import type { IUniform } from "three"
 
 type NormalizedRGB = [number, number, number]
@@ -92,24 +92,16 @@ interface SilkPlaneProps {
 }
 
 const SilkPlane = forwardRef<Mesh, SilkPlaneProps>(function SilkPlane({ uniforms }, ref) {
-  const { viewport } = useThree()
+  const { viewport, invalidate } = useThree()
 
   useLayoutEffect(() => {
     const mesh = ref as React.MutableRefObject<Mesh | null>
     if (mesh.current) {
       mesh.current.scale.set(viewport.width, viewport.height, 1)
     }
-  }, [ref, viewport])
-
-  useFrame((_state: RootState, delta: number) => {
-    const mesh = ref as React.MutableRefObject<Mesh | null>
-    if (mesh.current) {
-      const material = mesh.current.material as ShaderMaterial & {
-        uniforms: SilkUniforms
-      }
-      material.uniforms.uTime.value += 0.1 * delta
-    }
-  })
+    // Trigger a single render after setup
+    invalidate()
+  }, [ref, viewport, invalidate])
 
   return (
     <mesh ref={ref}>
@@ -126,6 +118,7 @@ export interface SilkProps {
   color?: string
   noiseIntensity?: number
   rotation?: number
+  staticTime?: number // New prop: fixed time value for static pattern
 }
 
 const SilkCanvas: React.FC<SilkProps> = ({
@@ -134,6 +127,7 @@ const SilkCanvas: React.FC<SilkProps> = ({
   color = "#7B7481",
   noiseIntensity = 1.5,
   rotation = 0,
+  staticTime = 2.0, // Default frozen moment - looks good
 }) => {
   const meshRef = useRef<Mesh>(null)
 
@@ -144,13 +138,14 @@ const SilkCanvas: React.FC<SilkProps> = ({
       uNoiseIntensity: { value: noiseIntensity },
       uColor: { value: new Color(...hexToNormalizedRGB(color)) },
       uRotation: { value: rotation },
-      uTime: { value: 0 },
+      uTime: { value: staticTime }, // Fixed time value instead of 0
     }),
-    [speed, scale, noiseIntensity, color, rotation],
+    [speed, scale, noiseIntensity, color, rotation, staticTime],
   )
 
   return (
-    <Canvas dpr={[1, 2]} frameloop="always">
+    // frameloop="demand" - renders only when invalidate() is called (once on mount)
+    <Canvas dpr={[1, 1.5]} frameloop="demand">
       <SilkPlane ref={meshRef} uniforms={uniforms} />
     </Canvas>
   )
