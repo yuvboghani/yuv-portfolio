@@ -155,11 +155,11 @@ export default function ExperiencePage() {
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
-                animate={index === 0 ? { opacity: 1, y: 0 } : undefined}
-                whileInView={index === 0 ? undefined : { opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
-                className="relative w-full bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-8 hover:bg-white/10 hover:border-[#42B0D5]/30 transition-all duration-300 group"
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                style={{ willChange: "opacity, transform" }}
+                className="relative w-full bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 md:p-8 hover:bg-white/15 hover:border-[#42B0D5]/40 transition-colors duration-300 group shadow-lg shadow-black/10"
               >
                 {/* Glowing dot connector */}
                 <div className="absolute -left-[2.35rem] md:-left-[4.4rem] top-6 w-4 h-4 bg-[#0a0a0c] border-2 border-[#42B0D5] rounded-full shadow-[0_0_10px_rgba(66,176,213,0.5)] z-10">

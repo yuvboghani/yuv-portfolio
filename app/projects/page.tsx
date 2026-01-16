@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "motion/react"
-import { ExternalLink, Book, Download } from "lucide-react"
+import { ExternalLink, Book, Download, Lock } from "lucide-react"
 import Link from "next/link"
 import { ConstructionOverlay } from "@/components/ui/construction-overlay"
 
@@ -20,7 +20,7 @@ export default function ProjectsPage() {
       lockButtons: true,
     },
     {
-      title: "Personal Portfolio V1.5",
+      title: "Personal Portfolio V1.6",
 
       description: "Immersive 3D/WebGL Identity Platform",
       fullDescription:
@@ -176,11 +176,11 @@ function ProjectCard({ project, index }: { project: any; index: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
-      animate={index === 0 ? { opacity: 1, y: 0 } : undefined}
-      whileInView={index === 0 ? undefined : { opacity: 1, y: 0 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group flex flex-col md:flex-row gap-4 md:gap-6 bg-neutral-900/40 backdrop-blur-sm border-2 border-neutral-800 rounded-2xl overflow-hidden hover:bg-neutral-900/60 hover:border-[#42B0D5]/50 transition-all"
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      style={{ willChange: "opacity, transform" }}
+      className="group flex flex-col md:flex-row gap-4 md:gap-6 bg-neutral-900/40 border-2 border-neutral-800 rounded-2xl overflow-hidden hover:bg-neutral-900/60 hover:border-[#42B0D5]/50 transition-colors duration-300"
     >
       <div className="md:w-2/5 aspect-video overflow-hidden flex-shrink-0 relative">
         {project.isUnderConstruction ? (
@@ -195,7 +195,7 @@ function ProjectCard({ project, index }: { project: any; index: number }) {
           <img
             src={project.image || "/placeholder.svg"}
             alt={project.title}
-            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-[filter] duration-300"
           />
         )}
       </div>
@@ -205,7 +205,7 @@ function ProjectCard({ project, index }: { project: any; index: number }) {
           <h3 className="font-syncopate text-2xl font-bold mb-1 uppercase tracking-tight flex items-center gap-3">
             {project.title}
             {project.isUnderConstruction && (
-              <ConstructionOverlay type="badge">🚧</ConstructionOverlay>
+              <span className="text-yellow-500 text-lg">🚧</span>
             )}
           </h3>
           {project.company && (
@@ -226,38 +226,40 @@ function ProjectCard({ project, index }: { project: any; index: number }) {
             ))}
           </div>
         </div>
-        <div className="flex flex-wrap gap-2 md:gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           {buttonsLocked ? (
             <>
-              <ConstructionOverlay type="badge">
-                <button
-                  className="flex items-center justify-center gap-1.5 md:gap-2 px-4 md:px-6 py-2 md:py-3 bg-neutral-800 rounded-full font-space-grotesk font-semibold text-neutral-500 uppercase tracking-wide text-xs md:text-sm cursor-not-allowed"
-                >
-                  Demo <ExternalLink className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
-                </button>
-              </ConstructionOverlay>
-              <ConstructionOverlay type="badge">
-                <button
-                  className="flex items-center justify-center gap-1.5 md:gap-2 px-4 md:px-6 py-2 md:py-3 bg-neutral-800 border-2 border-neutral-700 rounded-full font-space-grotesk font-semibold text-neutral-500 uppercase tracking-wide text-xs md:text-sm cursor-not-allowed"
-                >
-                  <span className="hidden sm:inline">Behind the Scenes</span>
-                  <span className="sm:hidden">Blog</span>
-                  <Book className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
-                </button>
-              </ConstructionOverlay>
+              <button
+                disabled
+                className="flex items-center justify-center gap-1.5 md:gap-2 px-4 md:px-6 py-2 md:py-3 bg-neutral-800 rounded-full font-space-grotesk font-semibold text-neutral-500 uppercase tracking-wide text-xs md:text-sm cursor-not-allowed opacity-60"
+              >
+                Demo <ExternalLink className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
+              </button>
+              <button
+                disabled
+                className="flex items-center justify-center gap-1.5 md:gap-2 px-4 md:px-6 py-2 md:py-3 bg-neutral-800 border-2 border-neutral-700 rounded-full font-space-grotesk font-semibold text-neutral-500 uppercase tracking-wide text-xs md:text-sm cursor-not-allowed opacity-60"
+              >
+                <span className="hidden sm:inline">Behind the Scenes</span>
+                <span className="sm:hidden">Blog</span>
+                <Book className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
+              </button>
+              <span className="flex items-center gap-1 text-yellow-500/80 text-xs font-space-grotesk uppercase tracking-wide">
+                <Lock className="w-3 h-3" />
+                Dev
+              </span>
             </>
           ) : (
             <>
               <a
                 href={project.demoLink}
-                className="flex items-center justify-center gap-1.5 md:gap-2 px-4 md:px-6 py-2 md:py-3 bg-[#42B0D5] rounded-full font-space-grotesk font-semibold hover:opacity-90 transition-opacity uppercase tracking-wide text-xs md:text-sm"
+                className="flex items-center justify-center gap-1.5 md:gap-2 px-4 md:px-6 py-2 md:py-3 bg-[#42B0D5] rounded-full font-space-grotesk font-semibold hover:opacity-90 transition-opacity duration-200 uppercase tracking-wide text-xs md:text-sm"
               >
                 Demo <ExternalLink className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
               </a>
 
               <Link
                 href={`/blog/${project.blogSlug}`}
-                className="flex items-center justify-center gap-1.5 md:gap-2 px-4 md:px-6 py-2 md:py-3 border-2 border-[#42B0D5] rounded-full font-space-grotesk font-semibold hover:bg-[#42B0D5]/10 transition-colors uppercase tracking-wide text-xs md:text-sm"
+                className="flex items-center justify-center gap-1.5 md:gap-2 px-4 md:px-6 py-2 md:py-3 border-2 border-[#42B0D5] rounded-full font-space-grotesk font-semibold hover:bg-[#42B0D5]/10 transition-colors duration-200 uppercase tracking-wide text-xs md:text-sm"
               >
                 <span className="hidden sm:inline">Behind the Scenes</span>
                 <span className="sm:hidden">Blog</span>
