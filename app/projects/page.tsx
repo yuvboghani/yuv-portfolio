@@ -16,11 +16,11 @@ export default function ProjectsPage() {
       tags: ["ROS 2", "LiDAR", "Sensor Fusion", "OpenCV", "Python", "YOLO"],
       demoLink: "#",
       blogSlug: "lidar-fusion",
-      image: "/lidar-fusion-placeholder.jpg",
+      image: "/autonomous-vehicle-self-driving-car.jpg",
       lockButtons: true,
     },
     {
-      title: "Personal Portfolio V2.2",
+      title: "Personal Portfolio V1.5",
 
       description: "Immersive 3D/WebGL Identity Platform",
       fullDescription:
@@ -28,7 +28,7 @@ export default function ProjectsPage() {
       tags: ["Next.js 15", "WebGL/R3F", "Tailwind CSS", "Framer Motion", "TypeScript"],
       demoLink: "/",
       blogSlug: "portfolio-v1",
-      image: "/images/portfolio-meta-shot.jpg",
+      image: "/Portfolio.png",
       lockButtons: true,
     },
     {
