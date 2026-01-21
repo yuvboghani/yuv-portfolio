@@ -6,11 +6,11 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/aevum/home',
-        destination: 'https://aevum-mu.vercel.app/',
+        source: '/aevum',
+        destination: 'https://aevum-mu.vercel.app/index.html',
       },
       {
-        source: '/aevum/home/:path*',
+        source: '/aevum/:path*',
         destination: 'https://aevum-mu.vercel.app/:path*',
       },
     ]
