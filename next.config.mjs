@@ -7,11 +7,11 @@ const nextConfig = {
     return [
       {
         source: '/aevum',
-        destination: 'https://aevum-mu.vercel.app/aevum/index.html',
+        destination: 'https://aevum-mu.vercel.app/',
       },
       {
         source: '/aevum/:path*',
-        destination: 'https://aevum-mu.vercel.app/aevum/:path*',
+        destination: 'https://aevum-mu.vercel.app/:path*',
       },
     ]
   },
