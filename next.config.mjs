@@ -13,6 +13,11 @@ const nextConfig = {
         source: '/aevum/home/:path*',
         destination: 'https://aevum-mu.vercel.app/:path*',
       },
+      // Proxy assets for the external Aevum app (Vite build output)
+      {
+        source: '/assets/:path*',
+        destination: 'https://aevum-mu.vercel.app/assets/:path*',
+      },
     ]
   },
   images: {
