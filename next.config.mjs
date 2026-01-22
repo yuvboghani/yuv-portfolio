@@ -4,21 +4,7 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   async rewrites() {
-    return [
-      {
-        source: '/aevum/home',
-        destination: 'https://aevum-mu.vercel.app/index.html',
-      },
-      {
-        source: '/aevum/home/:path*',
-        destination: 'https://aevum-mu.vercel.app/:path*',
-      },
-      // Proxy assets for the external Aevum app (Vite build output)
-      {
-        source: '/assets/:path*',
-        destination: 'https://aevum-mu.vercel.app/assets/:path*',
-      },
-    ]
+    return []
   },
   images: {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
