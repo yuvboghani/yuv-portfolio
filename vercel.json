@@ -1,0 +1,12 @@
+{
+    "rewrites": [
+        {
+            "source": "/aevum/:path*",
+            "destination": "https://aevum-mu.vercel.app/aevum/:path*"
+        },
+        {
+            "source": "/aevum",
+            "destination": "https://aevum-mu.vercel.app/aevum/"
+        }
+    ]
+}

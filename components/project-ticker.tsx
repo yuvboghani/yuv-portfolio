@@ -3,20 +3,9 @@
 import { featuredProjects, type Project } from "@/lib/projects"
 import { motion } from "framer-motion"
 import { ExternalLink } from "lucide-react"
+import Link from "next/link"
 
-interface ProjectTickerProps {
-    onSelectProject: (project: Project) => void
-}
-
-export function ProjectTicker({ onSelectProject }: ProjectTickerProps) {
-    const handleClick = (project: Project) => {
-        // Emit the project selection to parent
-        onSelectProject(project)
-
-        // Smoothly scroll to top to reveal the split hero
-        window.scrollTo({ top: 0, behavior: "smooth" })
-    }
-
+export function ProjectTicker() {
     // If no featured projects, don't render the section
     if (featuredProjects.length === 0) {
         return null
@@ -46,7 +35,6 @@ export function ProjectTicker({ onSelectProject }: ProjectTickerProps) {
                     <ProjectCard
                         key={project.slug}
                         project={project}
-                        onClick={() => handleClick(project)}
                     />
                 ))}
             </div>
@@ -56,13 +44,14 @@ export function ProjectTicker({ onSelectProject }: ProjectTickerProps) {
 
 interface ProjectCardProps {
     project: Project
-    onClick: () => void
 }
 
-function ProjectCard({ project, onClick }: ProjectCardProps) {
+function ProjectCard({ project }: ProjectCardProps) {
+    const href = project.demoLink || `/${project.slug}`
+
     return (
-        <button
-            onClick={onClick}
+        <Link
+            href={href}
             className="group relative flex-shrink-0 w-[320px] md:w-[400px] aspect-[16/10] 
                  rounded-2xl overflow-hidden cursor-pointer
                  transition-all duration-500 ease-out
@@ -164,6 +153,6 @@ function ProjectCard({ project, onClick }: ProjectCardProps) {
                     boxShadow: `inset 0 0 0 2px ${project.accentColor}50`,
                 }}
             />
-        </button>
+        </Link>
     )
 }

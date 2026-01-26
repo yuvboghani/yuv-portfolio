@@ -33,7 +33,7 @@ export default function HomePage() {
       </section>
 
       {/* Project Ticker - Between Hero and About */}
-      <ProjectTicker onSelectProject={setFocusedProject} />
+      <ProjectTicker />
 
       {/* About Section */}
       <section className="relative px-4 md:px-6 pt-16 md:pt-20 pb-24 md:pb-32">
