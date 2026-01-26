@@ -26,7 +26,7 @@ export const projects: Project[] = [
             "Aevum is an intelligent time management system that uses NLP to understand natural language scheduling requests. It integrates with Google Calendar and uses LLM-powered analysis to optimize your schedule, suggest meeting times, and provide insights into time allocation patterns.",
         tags: ["Next.js", "OpenAI", "Google Calendar API", "TypeScript", "Prisma"],
         image: "/aevum-hero.png",
-        demoLink: "/aevum",
+        demoLink: "/aevum/home",
         accentColor: "#6366f1",
         status: "deployed",
         featured: true,
