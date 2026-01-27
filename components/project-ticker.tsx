@@ -47,7 +47,8 @@ interface ProjectCardProps {
 }
 
 function ProjectCard({ project }: ProjectCardProps) {
-    const href = project.demoLink || `/${project.slug}`
+    // Always link to the project description page, not directly to the demo
+    const href = `/${project.slug}`
 
     return (
         <Link
@@ -134,7 +135,7 @@ function ProjectCard({ project }: ProjectCardProps) {
                 <div className="mt-4 flex items-center gap-2 text-sm font-space-grotesk font-medium uppercase tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     style={{ color: project.accentColor }}
                 >
-                    <span>Try it out</span>
+                    <span>View Project</span>
                     <ExternalLink className="w-4 h-4" />
                 </div>
             </div>
