@@ -18,7 +18,7 @@ export default function ProjectLandingPage({ slug }: ProjectLandingPageProps) {
     }
 
     return (
-        <main className="relative min-h-screen text-white bg-black flex items-center justify-center p-4 md:p-6">
+        <main className="relative min-h-screen text-white flex items-center justify-center p-4 md:p-6">
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -29,7 +29,7 @@ export default function ProjectLandingPage({ slug }: ProjectLandingPageProps) {
                 {/* Back Button */}
                 <Link
                     href="/"
-                    className="absolute top-0 right-0 z-20 flex items-center gap-2 px-4 py-2 
+                    className="absolute top-0 left-0 z-20 flex items-center gap-2 px-4 py-2 
                     bg-white/5 backdrop-blur-sm border border-white/10 rounded-full
                     text-neutral-400 hover:text-white hover:bg-white/10 hover:border-white/20
                     transition-all duration-300 font-space-grotesk text-sm uppercase tracking-wider"
