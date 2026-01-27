@@ -5,18 +5,47 @@ const nextConfig = {
   },
   async rewrites() {
     return [
+      // Auth & Debug Routes -> /api/ (Backend)
       {
         source: '/aevum/login',
-        destination: 'https://aevum-mu.vercel.app/aevum/login',
+        destination: 'https://aevum-mu.vercel.app/api/login',
       },
       {
         source: '/aevum/callback',
-        destination: 'https://aevum-mu.vercel.app/aevum/callback',
+        destination: 'https://aevum-mu.vercel.app/api/callback',
       },
       {
         source: '/aevum/debug-session',
-        destination: 'https://aevum-mu.vercel.app/aevum/debug-session',
+        destination: 'https://aevum-mu.vercel.app/api/debug-session',
       },
+
+      // API Routes -> /api/ (Backend)
+      {
+        source: '/aevum/busy',
+        destination: 'https://aevum-mu.vercel.app/api/busy',
+      },
+      {
+        source: '/aevum/tasks',
+        destination: 'https://aevum-mu.vercel.app/api/tasks',
+      },
+      {
+        source: '/aevum/calendars',
+        destination: 'https://aevum-mu.vercel.app/api/calendars',
+      },
+      {
+        source: '/aevum/optimize',
+        destination: 'https://aevum-mu.vercel.app/api/optimize',
+      },
+      {
+        source: '/aevum/ai/:path*',
+        destination: 'https://aevum-mu.vercel.app/api/ai/:path*',
+      },
+      {
+        source: '/aevum/architect/:path*',
+        destination: 'https://aevum-mu.vercel.app/api/architect/:path*',
+      },
+
+      // Frontend Routes -> /aevum/ (React App)
       {
         source: '/aevum/home/:path*',
         destination: 'https://aevum-mu.vercel.app/aevum/:path*',
