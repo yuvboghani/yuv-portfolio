@@ -9,6 +9,14 @@
             "destination": "https://aevum-mu.vercel.app/aevum/vite.svg"
         },
         {
+            "source": "/aevum/callback",
+            "destination": "https://aevum-mu.vercel.app/aevum/callback"
+        },
+        {
+            "source": "/aevum/login",
+            "destination": "https://aevum-mu.vercel.app/aevum/login"
+        },
+        {
             "source": "/aevum/home/:path*",
             "destination": "https://aevum-mu.vercel.app/aevum/:path*"
         },
