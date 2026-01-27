@@ -4,7 +4,28 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   async rewrites() {
-    return []
+    return [
+      {
+        source: '/aevum/login',
+        destination: 'https://aevum-mu.vercel.app/aevum/login',
+      },
+      {
+        source: '/aevum/callback',
+        destination: 'https://aevum-mu.vercel.app/aevum/callback',
+      },
+      {
+        source: '/aevum/debug-session',
+        destination: 'https://aevum-mu.vercel.app/aevum/debug-session',
+      },
+      {
+        source: '/aevum/home/:path*',
+        destination: 'https://aevum-mu.vercel.app/aevum/:path*',
+      },
+      {
+        source: '/aevum/home',
+        destination: 'https://aevum-mu.vercel.app/aevum/',
+      }
+    ]
   },
   images: {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
