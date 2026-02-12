@@ -20,7 +20,7 @@ export default function ProjectsPage() {
       lockButtons: true,
     },
     {
-      title: "Personal Portfolio V3.0",
+      title: "Personal Portfolio V3.8",
 
       description: "Immersive 3D/WebGL Identity Platform",
       fullDescription:
