@@ -1,12 +1,24 @@
 "use client"
 
 import { motion } from "motion/react"
-import { ExternalLink, Book, Download, Lock } from "lucide-react"
+import { ExternalLink, Book, Download, Lock, Github } from "lucide-react"
 import Link from "next/link"
 import { ConstructionOverlay } from "@/components/ui/construction-overlay"
 
 export default function ProjectsPage() {
   const deployedProjects = [
+    {
+      title: "Aevum",
+      description: "Deterministic Time-Architecture & CSP Solver",
+      fullDescription:
+        "A smart scheduling engine that uses heuristic algorithms and a GLM API to dynamically batch and place tasks around fixed calendar constraints. Features a spatial, drag-and-drop canvas.",
+      tags: ["React", "FastAPI", "Python", "GLM API", "Vercel"],
+      demoLink: "/aevum",
+      githubLink: "https://github.com/yuvboghani/aevum",
+      blogSlug: "aevum",
+      image: "/aevum-hero.png",
+      lockButtons: false,
+    },
     {
       title: "Lidar Fusion Project",
       company: "Penn State Advanced Vehicular Team",
@@ -20,7 +32,7 @@ export default function ProjectsPage() {
       lockButtons: true,
     },
     {
-      title: "Personal Portfolio V3.8",
+      title: "Personal Portfolio V3.9",
 
       description: "Immersive 3D/WebGL Identity Platform",
       fullDescription:
@@ -254,17 +266,28 @@ function ProjectCard({ project, index }: { project: any; index: number }) {
                 href={project.demoLink}
                 className="flex items-center justify-center gap-1.5 md:gap-2 px-4 md:px-6 py-2 md:py-3 bg-[#42B0D5] rounded-full font-space-grotesk font-semibold hover:opacity-90 transition-opacity duration-200 uppercase tracking-wide text-xs md:text-sm"
               >
-                Demo <ExternalLink className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
+                Live Demo <ExternalLink className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
               </a>
 
-              <Link
-                href={`/blog/${project.blogSlug}`}
-                className="flex items-center justify-center gap-1.5 md:gap-2 px-4 md:px-6 py-2 md:py-3 border-2 border-[#42B0D5] rounded-full font-space-grotesk font-semibold hover:bg-[#42B0D5]/10 transition-colors duration-200 uppercase tracking-wide text-xs md:text-sm"
-              >
-                <span className="hidden sm:inline">Behind the Scenes</span>
-                <span className="sm:hidden">Blog</span>
-                <Book className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
-              </Link>
+              {project.githubLink ? (
+                <a
+                  href={project.githubLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-1.5 md:gap-2 px-4 md:px-6 py-2 md:py-3 border-2 border-[#42B0D5] rounded-full font-space-grotesk font-semibold hover:bg-[#42B0D5]/10 transition-colors duration-200 uppercase tracking-wide text-xs md:text-sm"
+                >
+                  Source Code <Github className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
+                </a>
+              ) : (
+                <Link
+                  href={`/blog/${project.blogSlug}`}
+                  className="flex items-center justify-center gap-1.5 md:gap-2 px-4 md:px-6 py-2 md:py-3 border-2 border-[#42B0D5] rounded-full font-space-grotesk font-semibold hover:bg-[#42B0D5]/10 transition-colors duration-200 uppercase tracking-wide text-xs md:text-sm"
+                >
+                  <span className="hidden sm:inline">Behind the Scenes</span>
+                  <span className="sm:hidden">Blog</span>
+                  <Book className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
+                </Link>
+              )}
             </>
           )}
         </div>
